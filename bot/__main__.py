@@ -11,7 +11,7 @@ from test_cog import TestCog
 
 load_dotenv()
 
-bot = commands.Bot(command_prefix='$',help_command=None)
+bot = commands.Bot(command_prefix='$', help_command=None)
 
 @bot.event
 async def on_ready():
