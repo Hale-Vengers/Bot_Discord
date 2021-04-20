@@ -1,13 +1,13 @@
 import datetime
 import discord
-import random
 import time
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 from discord.utils import get
-from test_cog import TestCog
+from perso_cog import PersoCog
+from signes_cog import SignesCog
 
 load_dotenv()
 
@@ -94,44 +94,6 @@ async def aide(ctx):
     await ctx.send("La liste des commandes à été envoyé par MP !")
     await author.send(embed=embed)
     
-@bot.command()
-async def donneznousunsigne(ctx):
-    r=open("saves/signe.txt","r")
-    m=r.readlines()
-    l=[]
-    for i in range(0,len(m)-1):
-        x=m[i]
-        z=len(x)
-        a=x[:z-1]
-        l.append(a)
-    l.append(m[i+1])
-    o=random.choice(l)
-    await ctx.send(o)
-    r.close()
-
-@bot.command()
-async def addsigne(ctx, *, signe):
-    a = open("saves/signe.txt","a")
-    a.write("\n" + signe)
-    a.close()
-    
-    await ctx.send("Le signe ***" + signe + "*** a bien été ajouté !")
-
-
-@bot.command(pass_context=True)
-async def listesignes(ctx):
-    author= ctx.message.author
-    r = open("saves/signe.txt", "r")
-    l_msg= discord.Embed(
-        title="Listes des signes :",
-        description = ' '.join(r.readlines()),
-        colour = discord.Colour.purple()
-        )
-    
-    await ctx.send("La liste des signes à été envoyé par MP !")
-    await author.send(embed = l_msg)
-    
-    r.close()
 
 @bot.command()
 async def clear(ctx, nb_del):
@@ -234,25 +196,6 @@ async def dodo(ctx):
         source = FFmpegPCMAudio('medias/sound/dodo.mp3')
         player = voice.play(source)
 
-@bot.command()
-async def hoothoot(ctx, nbhoot: int):    
-    x=1
-    
-    await ctx.send("hoot-hoot", tts = True)
-    
-    while x <= nbhoot:
-        await ctx.send(file=discord.File('medias/images/hoothoot.png'))
-        x=x+1
-
-    channel = ctx.message.author.voice.channel
-    voice = get(bot.voice_clients, guild=ctx.guild)
-    if voice and voice.is_connected():
-        await voice.move_to(channel)
-    else:
-        voice = await channel.connect()
-        source = FFmpegPCMAudio('medias/sound/hoothoot.mp3')
-        player = voice.play(source)
-
 @bot.command(pass_context=True)
 async def lost(ctx):
     channel = ctx.message.author.voice.channel
@@ -275,5 +218,6 @@ async def cassetoi(ctx):
     await ctx.voice_client.disconnect()
     
     
-bot.add_cog(TestCog(bot))
+bot.add_cog(PersoCog(bot))
+bot.add_cog(SignesCog(bot))
 bot.run(os.environ['BOT_TOKEN'])
