@@ -7,13 +7,11 @@ from dotenv import load_dotenv
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 from discord.utils import get
+from test_cog import TestCog
 
 load_dotenv()
 
-description = '''Hale est parmi vous'''
-bot = commands.Bot(command_prefix='$', description=description)
-
-bot.remove_command("help")
+bot = commands.Bot(command_prefix='$',help_command=None)
 
 @bot.event
 async def on_ready():
@@ -98,7 +96,7 @@ async def aide(ctx):
     
 @bot.command()
 async def donneznousunsigne(ctx):
-    r=open("signe.txt","r")
+    r=open("saves/signe.txt","r")
     m=r.readlines()
     l=[]
     for i in range(0,len(m)-1):
@@ -113,7 +111,7 @@ async def donneznousunsigne(ctx):
 
 @bot.command()
 async def addsigne(ctx, *, signe):
-    a = open("signe.txt","a")
+    a = open("saves/signe.txt","a")
     a.write("\n" + signe)
     a.close()
     
@@ -123,7 +121,7 @@ async def addsigne(ctx, *, signe):
 @bot.command(pass_context=True)
 async def listesignes(ctx):
     author= ctx.message.author
-    r = open("signe.txt", "r")
+    r = open("saves/signe.txt", "r")
     l_msg= discord.Embed(
         title="Listes des signes :",
         description = ' '.join(r.readlines()),
@@ -150,7 +148,7 @@ async def clear(ctx, nb_del):
 
 @bot.command()
 async def impardonnable(ctx):
-    r=open("impardonnable.txt","r")
+    r=open("saves/impardonnable.txt","r")
     m=r.readlines()
     l=[]
     for i in range(0,len(m)-1):
@@ -166,7 +164,7 @@ async def impardonnable(ctx):
 @bot.command(pass_context=True)
 async def lyricsimpardonnable(ctx):
     author= ctx.message.author
-    r = open("impardonnable.txt", "r")
+    r = open("saves/impardonnable.txt", "r")
     l_msg= discord.Embed(
         title="Empire - Impardonnable (2019)",
         description = ' '.join(r.readlines()),
@@ -181,7 +179,7 @@ async def lyricsimpardonnable(ctx):
 @bot.command()
 async def bonbot(ctx):
 
-    file="bonbot.txt"
+    file="saves/bonbot.txt"
     with open(file,"r") as f:
         nb = f.read()
         
@@ -192,25 +190,9 @@ async def bonbot(ctx):
     await ctx.send("Merci, on m'a complimenté **" + str(new_nb) + "** fois !")
 
 @bot.command()
-async def hale(ctx):
-    await ctx.send("Bien et bon")
-    
-@bot.command()
 async def timer(ctx):
     date = datetime.datetime.fromtimestamp(customTimestamp)
     await ctx.send(date.strftime("%Y-%m-%d %H:%M:%S"))
-
-@bot.command()
-async def fantomas(ctx):
-    author= ctx.message.author
-    
-    await author.edit(nick="FANTOMAS")
-    await ctx.send("Maintenan tu é 1 FANTOMAS")
-
-
-@bot.command()
-async def raph(ctx):
-    await ctx.send("Il est tout puissant")
 
 @bot.command()
 async def hayato(ctx, nbhoot: int):    
@@ -291,7 +273,7 @@ async def viens(ctx):
 @bot.command()
 async def cassetoi(ctx):
     await ctx.voice_client.disconnect()
-
+    
+    
+bot.add_cog(TestCog(bot))
 bot.run(os.environ['BOT_TOKEN'])
-
-
