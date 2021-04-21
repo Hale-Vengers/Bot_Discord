@@ -11,6 +11,7 @@ from discord.utils import get
 from empire_cog import EmpireCog
 from perso_cog import PersoCog
 from signes_cog import SignesCog
+from vocal_cog import VocalCog
 
 load_dotenv()
 
@@ -177,18 +178,9 @@ async def lost(ctx):
     source = FFmpegPCMAudio('medias/music/lost.mp3')
     player = voice.play(source)
 
-@bot.command()
-async def viens(ctx):
-    channel= ctx.author.voice.channel
-    await channel.connect()
-    
-
-@bot.command()
-async def cassetoi(ctx):
-    await ctx.voice_client.disconnect()
-
-bot.add_cog(EmpireCog(bot))
-bot.add_cog(PersoCog(bot))
-bot.add_cog(SignesCog(bot))
+    bot.add_cog(EmpireCog(bot))
+    bot.add_cog(PersoCog(bot))
+    bot.add_cog(SignesCog(bot))
+    bot.add_cog(VocalCog(bot))
 
 bot.run(os.environ['BOT_TOKEN'])
