@@ -25,26 +25,6 @@ class PersoCog(commands.Cog):
 
 
 	@commands.command()
-	async def hoothoot(self, ctx, nbhoot: int):    
-		x=1
-	
-		await ctx.send("hoot-hoot", tts = True)
-	
-		while x <= nbhoot:
-			await ctx.send(file=discord.File('medias/images/hoothoot.png'))
-			x=x+1
-
-		channel = ctx.message.author.voice.channel
-		voice = get(bot.voice_clients, guild=ctx.guild)
-		if voice and voice.is_connected():
-			await voice.move_to(channel)
-		else:
-			voice = await channel.connect()
-			source = FFmpegPCMAudio('medias/sound/hoothoot.mp3')
-			player = voice.play(source)
-	
- 
-	@commands.command()
 	async def raph(self, ctx):
 		await ctx.send("Il est tout puissant")
 		

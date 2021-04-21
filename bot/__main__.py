@@ -45,6 +45,15 @@ async def on_message(message):
 		await message.channel.send("Amende owo")
 	if hoots in content:
 		await message.channel.send(file=discord.File('medias/images/hoothoot.png'))
+
+		channel = ctx.message.author.voice.channel
+		voice = get(bot.voice_clients, guild=ctx.guild)
+		if voice and voice.is_connected():
+			await voice.move_to(channel)
+		else:
+			voice = await channel.connect()
+			source = FFmpegPCMAudio('medias/sound/hoothoot.mp3')
+			player = voice.play(source)
 		
 	await bot.process_commands(message)
  

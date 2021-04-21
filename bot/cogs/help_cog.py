@@ -41,7 +41,6 @@ class HelpCog(commands.Cog):
 		embed.add_field(name = "____________________\n------> Personnalisés :", value="Commandes dédiés aux Hale-Vengers", inline = False)
 		embed.add_field(name = "$fantomas", value = "Deviens FANTOMAS", inline = False)
 		embed.add_field(name = "$hale", value = "Juste Hale.", inline = False)
-		embed.add_field(name = "$hoothoot #", value = "HOOT-HOOT (# = le nombre de fois ou il doit apparaître", inline = False)
 		embed.add_field(name = "$raph", value = "?", inline = False)
 	
 		embed.add_field(name = "____________________\n------> Signes :", value="Commandes liés au système de signes", inline = False)
