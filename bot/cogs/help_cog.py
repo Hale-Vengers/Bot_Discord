@@ -39,10 +39,16 @@ class HelpCog(commands.Cog):
 		embed.add_field(name = "$lyricsimpardonnable", value = "Envoi en MP les lyrics d'Impardonnable.", inline = False)
 	
 		embed.add_field(name = "____________________\n------> Personnalisés :", value="Commandes dédiés aux Hale-Vengers", inline = False)
+		embed.add_field(name = "$creerprofil", value = "Crée un profil", inline = False)
+		embed.add_field(name = "$listeprofils", value = "Montre la liste de tout les profils existants", inline = False)
+		embed.add_field(name = "$surnom #####", value = "Cette commande permet de se définir un surnom (ici #####)", inline = False)
+		embed.add_field(name = "$voirprofil", value = "Consulte le surnom et le niveau du profil", inline = False)
+
+		embed.add_field(name = "____________________\n------> Profil :", value="Commandes dédiés aux profils", inline = False)
 		embed.add_field(name = "$fantomas", value = "Deviens FANTOMAS", inline = False)
 		embed.add_field(name = "$hale", value = "Juste Hale.", inline = False)
 		embed.add_field(name = "$raph", value = "?", inline = False)
-	
+
 		embed.add_field(name = "____________________\n------> Signes :", value="Commandes liés au système de signes", inline = False)
 		embed.add_field(name = "$addsigne ######", value = "Cette commande permet d'ajouter une phrase (ici ######) dans la liste de signes.", inline = False)
 		embed.add_field(name = "$listesignes", value = "Cette commande permet de lister les différentes phrases", inline = False)
