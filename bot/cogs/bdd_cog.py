@@ -33,7 +33,7 @@ class BddCog(commands.Cog):
 		c.close()
 		conn.close()
   		
-		await ctx.send("Un compte pour **" + authorname + "** à bien été crée !")
+		await ctx.send("Un profil pour **" + authorname + "** à bien été crée !")
 
 
 	@commands.command(pass_context=True)
