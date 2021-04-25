@@ -19,4 +19,13 @@ class VocalCog(commands.Cog):
 
 	@commands.command()
 	async def cassetoi(self, ctx):
-		await ctx.voice_client.disconnect()
+		emoji = '\N{THUMBS UP SIGN}'
+		voice = discord.utils.get(self.bot.voice_clients, guild = ctx.guild)
+  
+		msg = channel.fetch_message(last_message_id)
+
+		if voice == None:
+			await ctx.send("Le bot n'est pas dans un canal vocal")
+		else:
+			await ctx.voice_client.disconnect()
+			await msg.add_reaction(emoji)
