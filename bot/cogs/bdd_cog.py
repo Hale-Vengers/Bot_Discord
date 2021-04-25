@@ -20,11 +20,11 @@ class BddCog(commands.Cog):
 		authorname = str(ctx.message.author)
 		authorid = str(ctx.message.author.id)
 
-		t = (authorname, authorid)
+		t = (authorname, authorname, authorid)
 
 		c = conn.cursor()
 		
-		c.execute("INSERT OR IGNORE INTO USERS (id, name, discord_id) VALUES (NULL, ?, ?);", t)
+		c.execute("INSERT OR IGNORE INTO USERS (id, name, nickname, discord_id) VALUES (NULL, ?, ?, ?);", t)
 		c.execute("INSERT OR IGNORE INTO LEVEL (id, lvl, exp) VALUES (last_insert_rowid(), 1, 0);")
 		c.execute("INSERT OR IGNORE INTO LOST (id, nb_lost) VALUES (last_insert_rowid(), 0);")
 		c.execute("INSERT OR IGNORE INTO BONBOT (id, nb_bonbot) VALUES (last_insert_rowid(), 0)")
@@ -80,7 +80,8 @@ class BddCog(commands.Cog):
 	async def surnom(self, ctx, *, nickname):
 
 		conn = sqlite3.connect('saves/save.db')
-		
+  		
+		author= ctx.message.author
 		authorname = str(ctx.message.author)
 		authorid = str(ctx.message.author.id)
 
@@ -89,6 +90,8 @@ class BddCog(commands.Cog):
 		c = conn.cursor()
 		
 		c.execute("UPDATE USERS SET nickname=? WHERE discord_id=?", t)
+  
+		await author.edit(nick=nickname)
 
 		await ctx.send("Le surnom de **" + authorname + "** est désormais *" + nickname + "*")
 
