@@ -8,6 +8,7 @@ from discord.ext import commands
 from discord import FFmpegPCMAudio
 from discord.utils import get
 
+from cogs.bdd_cog import BddCog
 from cogs.empire_cog import EmpireCog
 from cogs.help_cog import HelpCog
 from cogs.perso_cog import PersoCog
@@ -140,6 +141,7 @@ async def lost(ctx):
 	source = FFmpegPCMAudio('medias/music/lost.mp3')
 	player = voice.play(source)
 
+bot.add_cog(BddCog(bot))
 bot.add_cog(EmpireCog(bot))
 bot.add_cog(HelpCog(bot))
 bot.add_cog(PersoCog(bot))
